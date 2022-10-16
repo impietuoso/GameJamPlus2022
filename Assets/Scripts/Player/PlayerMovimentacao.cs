@@ -39,6 +39,12 @@ public class PlayerMovimentacao : MonoBehaviour
     private TrailRenderer tr;
     private float gravidadeNormal;
 
+    [Header("KnockBack")]
+    public float knockBackX = 100f;
+    public float knockBackY = 10f;
+    public float direcaoKnockBack = 0;
+    public bool atingido = false;
+
 
     private void Awake()
     {
@@ -50,6 +56,8 @@ public class PlayerMovimentacao : MonoBehaviour
 
     // =====================================================================     INPUTS        =============================================================================================
     private void Update() {
+        if(atingido) return;
+
         horizontal = Input.GetAxisRaw("Horizontal");
         if(Input.GetButtonDown("Jump")) requisicaoPulo = true;
         if(Input.GetButton("Jump")) apertando = true;
@@ -138,6 +146,26 @@ public class PlayerMovimentacao : MonoBehaviour
         yield return new WaitForSeconds(esperaDash);
         podeDash = true;
 
+    }
+
+     // ===========================================================================      KNOCKBACK        =============================================================================================
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if(other.tag == "Inimigo")
+        {
+            StartCoroutine(KnockBack());
+        }
+    }
+ 
+    private IEnumerator KnockBack()
+    {
+        rb.velocity = new Vector2(0,0);
+        atingido = true;
+        if(olharDireita) direcaoKnockBack = 1;
+        else direcaoKnockBack = -1;
+        rb.AddForce( new Vector3(knockBackX * direcaoKnockBack, knockBackY, 0), ForceMode2D.Impulse);
+        yield return new WaitForSeconds(2f);
+        atingido = false;
     }
 
     // ===========================================================================      SUPORTE E VERIFICAÇÕES      ============================================================================
