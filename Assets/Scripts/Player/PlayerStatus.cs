@@ -23,15 +23,15 @@ public class PlayerStatus : MonoBehaviour
 
     private void HabilitarDash()
     {
+        dashOn = true;
         vida ++;
         AnimacaoGanharArmadura();
-        dashOn = true;
     }
     private void HabilitarPuloDuplo()
     {
+        puloDuploOn = true;
         vida ++;
         AnimacaoGanharArmadura();
-        puloDuploOn = true;
     }
     private void TomarDano()
     {
@@ -46,21 +46,14 @@ public class PlayerStatus : MonoBehaviour
 
     public bool DashHabilitado()
     {
-        StartCoroutine(CoolDown());
         if(dashOn == true) return true;
         else return false;
     }
 
     public int PuloDuploHabilitado()
     {
-        StartCoroutine(CoolDown());
         if(puloDuploOn == true) return 2;
         else return 1;
-    }
-
-    private IEnumerator CoolDown()
-    {
-        yield return new WaitForSeconds(0.5f);
     }
 
     private IEnumerator Invulnerabilidade()

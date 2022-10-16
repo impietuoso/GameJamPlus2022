@@ -136,6 +136,7 @@ public class PlayerMovimentacao : MonoBehaviour
 
     private IEnumerator Dash() 
     {
+        Debug.Log("esta dashando");
         podeDash = false;
         estaDashando = true;
         rb.gravityScale = 0f;
@@ -156,8 +157,21 @@ public class PlayerMovimentacao : MonoBehaviour
         {
             StartCoroutine(KnockBack());
         }
-        if(other.tag == "ArmaduraDash") podeDash = PlayerStatus.instance.DashHabilitado();
-        if(other.tag == "ArmaduraPuloDuplo") maximoPulos = PlayerStatus.instance.PuloDuploHabilitado();
+        if(other.tag == "ArmaduraDash") 
+        {
+            StartCoroutine(PegarHabilidade()); 
+        }
+        if(other.tag == "ArmaduraPuloDuplo")
+        {
+            StartCoroutine(PegarHabilidade());
+        } 
+    }
+
+    private IEnumerator PegarHabilidade()
+    {
+        yield return new WaitForSeconds(0.5f);
+        if(!podeDash) podeDash = PlayerStatus.instance.DashHabilitado();
+        if(maximoPulos == 1) maximoPulos = PlayerStatus.instance.PuloDuploHabilitado();
     }
  
      // ===========================================================================      KNOCKBACK        =============================================================================================
