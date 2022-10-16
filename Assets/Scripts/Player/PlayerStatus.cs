@@ -11,6 +11,7 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField] private bool podeDano = true;
     [SerializeField] private float tempoInvuneral = 2f;
     public Animator playerAnim;
+    public GameObject GameOverPanel;
 
     private void Awake() {
         if(instance == null) instance = this;
@@ -69,6 +70,8 @@ public class PlayerStatus : MonoBehaviour
     {
         playerAnim.Play("Death");
         Debug.Log("Morreu");
+        GameManager.instance.ShowCanvasGroup(GameOverPanel.GetComponent<CanvasGroup>());
+        Destroy(this.gameObject, 1.5f);
         // Desabilitar o player
         // tela de gameOver com Retry
     }
