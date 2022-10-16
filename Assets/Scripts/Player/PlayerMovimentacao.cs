@@ -21,7 +21,7 @@ public class PlayerMovimentacao : MonoBehaviour
     public LayerMask camadaChao;
     [SerializeField] private int contadorDePulos = 0;
     [SerializeField] private int maximoPulos = 1;
-    [SerializeField]  private float forcaDoPulo = 8f;
+    [SerializeField] private float forcaDoPulo = 8f;
     [SerializeField] private float tempoCoyote = 0.2f;
     [SerializeField] private float contadortempoCoyote;
     [SerializeField] private float tempoPulo = 0;
@@ -178,6 +178,8 @@ public class PlayerMovimentacao : MonoBehaviour
         yield return new WaitForSeconds(2f);
         atingido = false;
         podeMover = true;
+        podeDash = PlayerStatus.instance.DashHabilitado();
+        maximoPulos = PlayerStatus.instance.PuloDuploHabilitado();
     }
 
     // ===========================================================================      SUPORTE E VERIFICAÇÕES      ============================================================================

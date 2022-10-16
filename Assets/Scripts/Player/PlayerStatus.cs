@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerStatus : MonoBehaviour
 {
     public static PlayerStatus instance;
-    [SerializeField] private int vida = 1;
+    [SerializeField] private byte vida = 1;
     [SerializeField] private bool puloDuploOn = false;
     [SerializeField] private bool dashOn = false;
     
@@ -14,43 +14,51 @@ public class PlayerStatus : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.tag == "ArmaduraDash") if(!dashOn) StartCoroutine(HabilitarDash());
-        if(other.tag == "ArmaduraPuloDuplo") if(!puloDuploOn) StartCoroutine(HabilitarPuloDuplo());
-        if(other.tag == "Inimigo") StartCoroutine(TomarDano());
+        if(other.tag == "ArmaduraDash") if(!dashOn) HabilitarDash();
+        if(other.tag == "ArmaduraPuloDuplo") if(!puloDuploOn) HabilitarPuloDuplo();
+        if(other.tag == "Inimigo") TomarDano();
     }
 
-    private IEnumerator HabilitarDash()
+
+    private void HabilitarDash()
     {
-        vida++;
-        GanharArmadura();
+        vida ++;
+        AnimacaoGanharArmadura();
         dashOn = true;
-        yield return new WaitForSeconds(1f);
     }
-    private IEnumerator HabilitarPuloDuplo()
+    private void HabilitarPuloDuplo()
     {
-        vida++;
-        GanharArmadura();
+        vida ++;
+        AnimacaoGanharArmadura();
         puloDuploOn = true;
-        yield return new WaitForSeconds(1f);
     }
-    private IEnumerator TomarDano()
+    private void TomarDano()
     {
         vida--;
+        if(dashOn && !puloDuploOn) dashOn = false;
+        if(!dashOn && puloDuploOn) puloDuploOn = false;
+        if(dashOn && puloDuploOn) puloDuploOn = false;
         AnimacaoTomarDano();
         if(vida == 0) Morte();
-        yield return new WaitForSeconds(1f);
     }
 
     public bool DashHabilitado()
     {
-        if(dashOn = true) return true;
+        StartCoroutine(CoolDown());
+        if(dashOn == true) return true;
         else return false;
     }
 
     public int PuloDuploHabilitado()
     {
-        if(puloDuploOn = true) return 2;
+        StartCoroutine(CoolDown());
+        if(puloDuploOn == true) return 2;
         else return 1;
+    }
+
+    private IEnumerator CoolDown()
+    {
+        yield return new WaitForSeconds(0.5f);
     }
 
     private void Morte()
@@ -62,7 +70,7 @@ public class PlayerStatus : MonoBehaviour
     {
         // animacao de tomar dano aqui
     }
-    private void GanharArmadura()
+    private void AnimacaoGanharArmadura()
     {
         // animacao de ganhar armadura aqui
     }

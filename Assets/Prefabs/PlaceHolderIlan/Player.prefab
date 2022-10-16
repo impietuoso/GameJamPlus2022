@@ -312,10 +312,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ff4dce2d6f5d1b44b253848eec53d60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  posicaoTiro: {fileID: 0}
+  posicaoTiro: {fileID: 2373065484433743699}
   podeAtirar: 1
   podeEspecial: 0
   contadorEspecial: 0
+  coolDown: 0.2
 --- !u!114 &5274024574910097510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,14 +329,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2332b0062dff4474f85571b67bcd4612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2373065484433743698}
+  player: {fileID: 2373065484546983638}
   velocidade: 8
+  horizontal: 0
   olharDireita: 1
   checkChao: {fileID: 2373065484320014262}
   camadaChao:
     serializedVersion: 2
     m_Bits: 64
   contadorDePulos: 0
+  maximoPulos: 1
   forcaDoPulo: 5
   tempoCoyote: 0.2
   contadortempoCoyote: 0
@@ -348,8 +351,12 @@ MonoBehaviour:
   duracaoDash: 0.5
   esperaDash: 2
   gravidadeDash: 0
-  podeDash: 1
+  podeDash: 0
   estaDashando: 0
+  knockBackX: 5
+  knockBackY: 2
+  direcaoKnockBack: 0
+  atingido: 0
 --- !u!114 &6409195306744737608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -376,3 +383,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5a7455bc9fe4c64f9ad0bfe8d229f7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vida: 1
+  puloDuploOn: 0
+  dashOn: 0
