@@ -66,7 +66,7 @@ public class ObjectPoolingInimigos : MonoBehaviour
 
         return null;
     }
-    public GameObject Pegarlaser()
+    public GameObject PegarLaser()
     {
         for (int i = 0; i < laserPool.Count; i++)
         {

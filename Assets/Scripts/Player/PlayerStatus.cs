@@ -9,6 +9,7 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField] private bool puloDuploOn = false;
     [SerializeField] private bool dashOn = false;
     [SerializeField] private bool podeDano = true;
+    [SerializeField] private float tempoInvuneral = 2f;
     
     private void Awake() {
         if(instance == null) instance = this;
@@ -59,7 +60,7 @@ public class PlayerStatus : MonoBehaviour
     private IEnumerator Invulnerabilidade()
     {
         podeDano = false;
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(tempoInvuneral);
         podeDano = true;
     }
 
