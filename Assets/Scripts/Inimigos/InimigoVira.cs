@@ -24,15 +24,16 @@ public class InimigoVira : MonoBehaviour
             if(distancia < 0 && olharDireita) Virar();
         }
 
-        if(checkPlayer() && !atirando) 
+        if(CheckPlayer() && !atirando) 
         {
             podeAtirar = true;
         }
         else podeAtirar = false;
+
         if(podeAtirar) StartCoroutine(Atirar());
     }
 
-    private bool checkPlayer()
+    private bool CheckPlayer()
     {
         Collider2D colisaoAlvo = Physics2D.OverlapCircle(transform.position, raio, playerLayer);
         if(colisaoAlvo != null) target = colisaoAlvo.transform;
@@ -55,7 +56,7 @@ public class InimigoVira : MonoBehaviour
         {
             bala.transform.position = posicaoBala.position;
             bala.SetActive(true);
-            bala.GetComponent<Bala>().direcao = (int)transform.localScale.y * -1;
+            bala.GetComponent<Bala>().direcao = (int)transform.localScale.x * -1;
         }
 
         yield return new WaitForSeconds(coolDownTiro);
@@ -68,7 +69,14 @@ public class InimigoVira : MonoBehaviour
     {
         olharDireita = !olharDireita;
         Vector3 localScale = transform.localScale;
-        localScale.y *= -1f;
+        localScale.x *= -1f;
         transform.localScale = localScale;
+    }
+
+    [SerializeField] private int vida = 30;
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.tag == "BalaPlayer") vida--;
+        if(vida < 1) gameObject.SetActive(false);
     }
 }

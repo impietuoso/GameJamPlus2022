@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 7833882292971483976}
   - component: {fileID: 859082917492815529}
   - component: {fileID: 1192608649380182325}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: InimigoComum
-  m_TagString: Untagged
+  m_TagString: Inimigo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119,7 +119,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.21133338}
@@ -145,9 +145,6 @@ MonoBehaviour:
   podeAtirar: 0
   atirando: 0
   coolDownTiro: 1.5
-  olharDireita: 0
-  target: {fileID: 0}
-  distancia: 0
 --- !u!1 &8176017852658987646
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,7 +154,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4890965059916329637}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TiroPosicao
   m_TagString: Untagged
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}

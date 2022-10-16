@@ -4,82 +4,97 @@ using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour
 {
+    [Header("Status")]
     public static PlayerStatus instance;
     [SerializeField] private byte vida = 1;
     [SerializeField] private bool puloDuploOn = false;
     [SerializeField] private bool dashOn = false;
     [SerializeField] private bool podeDano = true;
-    
+    [SerializeField] private float tempoInvuneral = 2f;
+
+    [Header("Animações")]
+    public Animator playerAnim;
+    public GameObject GameOverPanel;
+    public AudioClip runSound;
+    public AudioClip jumpSound;
+    public AudioClip atkSound;
+    public AudioClip damageSound;
+    public AudioClip deathSound;
+    public AudioClip dashSound;
+
     private void Awake() {
         if(instance == null) instance = this;
+        playerAnim = GetComponent<Animator>();
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.tag == "ArmaduraDash") if(!dashOn) HabilitarDash();
         if(other.tag == "ArmaduraPuloDuplo") if(!puloDuploOn) HabilitarPuloDuplo();
-        if(other.tag == "Inimigo") TomarDano();
+        if(other.tag == "Inimigo" || other.tag == "BalaInimigo") {
+            TomarDano();
+        }
     }
 
+    public void RunSound() {
+        AudioManager.instance.PlaySound(PlayerStatus.instance.runSound);
+    }
 
     private void HabilitarDash()
     {
+        dashOn = true;
         vida ++;
         AnimacaoGanharArmadura();
-        dashOn = true;
     }
     private void HabilitarPuloDuplo()
     {
+        puloDuploOn = true;
         vida ++;
         AnimacaoGanharArmadura();
-        puloDuploOn = true;
     }
-    private void TomarDano()
-    {
-        if(podeDano) vida--;
-        StartCoroutine(Invulnerabilidade());
-        if(dashOn && !puloDuploOn) dashOn = false;
-        if(!dashOn && puloDuploOn) puloDuploOn = false;
-        if(dashOn && puloDuploOn) puloDuploOn = false;
-        AnimacaoTomarDano();
-        if(vida == 0) Morte();
+    private void TomarDano() {
+        if (podeDano) 
+        {
+            vida--;
+            StartCoroutine(Invulnerabilidade());
+            if(dashOn && !puloDuploOn) dashOn = false;
+            if(!dashOn && puloDuploOn) puloDuploOn = false;
+            if(dashOn && puloDuploOn) puloDuploOn = false;
+            AnimacaoTomarDano();
+            if(vida == 0) Morte();
+        }
     }
 
     public bool DashHabilitado()
     {
-        StartCoroutine(CoolDown());
         if(dashOn == true) return true;
         else return false;
     }
 
     public int PuloDuploHabilitado()
     {
-        StartCoroutine(CoolDown());
         if(puloDuploOn == true) return 2;
         else return 1;
-    }
-
-    private IEnumerator CoolDown()
-    {
-        yield return new WaitForSeconds(0.5f);
     }
 
     private IEnumerator Invulnerabilidade()
     {
         podeDano = false;
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(tempoInvuneral);
         podeDano = true;
     }
 
     private void Morte()
     {
+        playerAnim.Play("Death");
         Debug.Log("Morreu");
+        GameManager.instance.ShowCanvasGroup(GameOverPanel.GetComponent<CanvasGroup>());
+        Destroy(this.gameObject, 1.5f);
         // Desabilitar o player
         // tela de gameOver com Retry
     }
 
-    private void AnimacaoTomarDano()
-    {
-        // animacao de tomar dano aqui
+    private void AnimacaoTomarDano() {
+        playerAnim.Play("Damage");
     }
     private void AnimacaoGanharArmadura()
     {

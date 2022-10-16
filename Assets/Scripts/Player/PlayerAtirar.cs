@@ -12,7 +12,7 @@ public class PlayerAtirar : MonoBehaviour
 
     private void Update() {
 
-        if(Input.GetButton("Fire1")) Atirar();
+        if(Input.GetButton("Fire1") || Input.GetKey(KeyCode.K)) Atirar();
 
         if(contadorEspecial == 100)
         {
@@ -24,6 +24,8 @@ public class PlayerAtirar : MonoBehaviour
     {
         if(podeAtirar)
         {
+            PlayerStatus.instance.playerAnim.SetFloat("Blend", 1f);
+            AudioManager.instance.PlaySound(PlayerStatus.instance.atkSound);
             podeAtirar = false;
             GameObject bala = PlayerObjectPooling.instance.PegarBala();
 
@@ -33,6 +35,7 @@ public class PlayerAtirar : MonoBehaviour
                 bala.SetActive(true);
                 bala.GetComponent<Bala>().direcao = (int)transform.localScale.x;
             }
+            StopCoroutine(CoolDown());
             StartCoroutine(CoolDown());
         }
 
@@ -60,5 +63,7 @@ public class PlayerAtirar : MonoBehaviour
     {
         yield return new WaitForSeconds(coolDown);
         podeAtirar = true;
+        yield return new WaitForSeconds(coolDown);
+        PlayerStatus.instance.playerAnim.SetFloat("Blend", 0);
     }
 }

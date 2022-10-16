@@ -55,32 +55,39 @@ public class PlayerMovimentacao : MonoBehaviour
 
     // =====================================================================     INPUTS        =============================================================================================
     private void Update() {
-        if(atingido) return;
+
+        PlayerStatus.instance.playerAnim.SetBool("IsJumping", !Physics2D.OverlapCircle(checkChao.position, 0.1f, camadaChao));
+        if (Input.GetAxisRaw("Horizontal") != 0)
+            PlayerStatus.instance.playerAnim.SetBool("IsRunning", true);
+        else
+            PlayerStatus.instance.playerAnim.SetBool("IsRunning", false);
+
+        if (atingido) return;
 
         horizontal = Input.GetAxisRaw("Horizontal");
-        if(Input.GetButtonDown("Jump")) 
-        {
+        if(Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.Space)) {
+            AudioManager.instance.PlaySound(PlayerStatus.instance.jumpSound);
             requisicaoPulo = true;
             if(contadorDePulos != maximoPulos) contadorDePulos++;
         }
-        if(Input.GetButton("Jump")) apertando = true;
-        if(Input.GetButtonUp("Jump")) 
+        if(Input.GetButton("Jump") || Input.GetKey(KeyCode.Space)) apertando = true;
+        if(Input.GetButtonUp("Jump") || Input.GetKeyUp(KeyCode.Space)) 
         {
             if(contadorDePulos == maximoPulos) requisicaoPulo = false;
             apertando= false;
         }
 
-        if(Input.GetButtonDown("Dash")) if(podeDash) StartCoroutine(Dash());
+        if(Input.GetButtonDown("Dash") || Input.GetKeyDown(KeyCode.L)) if(podeDash) StartCoroutine(Dash());
     }
 
     private void FixedUpdate()
     {
         // não permite virar nem pular nem nada enquanto está no dash
-        if (estaDashando) return;
+        //if (estaDashando) return;
 
         // ================================================================     MOVIMENTAÇÃO        =============================================================================================
-        if (podeMover) rb.velocity = new Vector2(horizontal * velocidade, rb.velocity.y);
-    
+        //if (podeMover) rb.velocity = new Vector2(horizontal * velocidade, rb.velocity.y);
+
         // Flip
         if (!olharDireita && horizontal > 0) Virar();
         else if (olharDireita && horizontal < 0) Virar();
@@ -102,7 +109,7 @@ public class PlayerMovimentacao : MonoBehaviour
 
         if(contadorTempoPulo < 0)
         {
-            estaNoAr = false;
+            //estaNoAr = false;
             apertando = false;
         } 
         if(contadorDePulos == maximoPulos) requisicaoPulo = false;
@@ -130,12 +137,18 @@ public class PlayerMovimentacao : MonoBehaviour
         // Aumentando gravidade do pulo
         if (rb.velocity.y < 0) rb.velocity += Vector2.up * Physics2D.gravity.y * 1.5f * Time.deltaTime;
 
+
+        if (estaDashando) return;
+
+        // ================================================================     MOVIMENTAÇÃO        =============================================================================================
+        if (podeMover) rb.velocity = new Vector2(horizontal * velocidade, rb.velocity.y);
+
     }
 
     // ===========================================================================      DASH        =============================================================================================
 
-    private IEnumerator Dash() 
-    {
+    private IEnumerator Dash() {
+        AudioManager.instance.PlaySound(PlayerStatus.instance.dashSound);
         podeDash = false;
         estaDashando = true;
         rb.gravityScale = 0f;
@@ -156,8 +169,22 @@ public class PlayerMovimentacao : MonoBehaviour
         {
             StartCoroutine(KnockBack());
         }
-        if(other.tag == "ArmaduraDash") podeDash = PlayerStatus.instance.DashHabilitado();
-        if(other.tag == "ArmaduraPuloDuplo") maximoPulos = PlayerStatus.instance.PuloDuploHabilitado();
+        if(other.tag == "ArmaduraDash") 
+        {
+            StartCoroutine(PegarHabilidade()); 
+        }
+        if(other.tag == "ArmaduraPuloDuplo")
+        {
+            StartCoroutine(PegarHabilidade());
+        } 
+    }
+
+    private IEnumerator PegarHabilidade()
+    {
+        yield return new WaitForSeconds(0.5f);
+        if(!podeDash) podeDash = PlayerStatus.instance.DashHabilitado();
+        if(maximoPulos == 1) maximoPulos = PlayerStatus.instance.PuloDuploHabilitado();
+        AudioManager.instance.PlaySound(PlayerStatus.instance.atkSound);
     }
  
      // ===========================================================================      KNOCKBACK        =============================================================================================
@@ -193,23 +220,19 @@ public class PlayerMovimentacao : MonoBehaviour
 
     // ===========================================================================        ANIMAÇÕES        =====================================================================================
    
-    private void AnimacaoDash() 
-    {
-        //anim.Play("Dash");// animação do Dash
+    private void AnimacaoDash() {
+        //PlayerStatus.instance.playerAnim.SetTrigger("Dash");
     }
 
-    private void AnimacaoCorrer()
-    {
-        //if (podeMover) anim.Play("Run"); // animação de correr
+    private void AnimacaoCorrer() {
+        //PlayerStatus.instance.playerAnim.SetBool("IsRunning", true);
     }
 
-    private void AnimacaoPular()
-    {
-        //anim.Play("Jump");// animação de pular
+    private void AnimacaoPular() {
+
     }
 
-    private void AnimacaoIdle() 
-    {
-        //anim.Play("Idle");// animação idle
+    private void AnimacaoIdle() {
+        //PlayerStatus.instance.playerAnim.SetBool("IsRunning", false);
     }
 }

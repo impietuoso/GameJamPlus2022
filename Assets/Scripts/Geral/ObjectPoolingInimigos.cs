@@ -9,15 +9,14 @@ public class ObjectPoolingInimigos : MonoBehaviour
     [Header("Bala")]
     [SerializeField] private GameObject balaInimigoPrefab;
     private List<GameObject> balasPool = new List<GameObject>();
-     [SerializeField] private int qtd = 30;
-
+    [SerializeField] private int qtd = 30;
     [Header("Laser")]
-     [SerializeField] private GameObject miraLaserPrefab;
+    [SerializeField] private GameObject miraLaserPrefab;
     private List<GameObject> miraPool = new List<GameObject>();
-     [SerializeField] private int qtdMira = 3;
+    [SerializeField] private int qtdMira = 3;
     [SerializeField] private GameObject laserPrefab;
     private List<GameObject> laserPool = new List<GameObject>();
-     [SerializeField] private int qtdLaser = 3;
+    [SerializeField] private int qtdLaser = 3;
 
     private void Awake()
     {
@@ -66,7 +65,7 @@ public class ObjectPoolingInimigos : MonoBehaviour
 
         return null;
     }
-    public GameObject Pegarlaser()
+    public GameObject PegarLaser()
     {
         for (int i = 0; i < laserPool.Count; i++)
         {

@@ -11,6 +11,7 @@ public class InimigoComum : MonoBehaviour
     [SerializeField] private bool podeAtirar = false;
     [SerializeField] private bool atirando = false;
     [SerializeField] private float coolDownTiro = 1.5f;
+    [SerializeField] private int vida = 30;
 
 
     private void Update()
@@ -52,6 +53,12 @@ public class InimigoComum : MonoBehaviour
         yield return new WaitForSeconds(coolDownTiro);
         podeAtirar = true;
         atirando = false;
+    }
+    
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.tag == "BalaPlayer") vida--;
+        if(vida < 1) gameObject.SetActive(false);
     }
 
     
