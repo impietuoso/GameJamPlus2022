@@ -65,19 +65,19 @@ public class PlayerMovimentacao : MonoBehaviour
         if (atingido) return;
 
         horizontal = Input.GetAxisRaw("Horizontal");
-        if(Input.GetButtonDown("Jump")) 
+        if(Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.Space)) 
         {
             requisicaoPulo = true;
             if(contadorDePulos != maximoPulos) contadorDePulos++;
         }
-        if(Input.GetButton("Jump")) apertando = true;
-        if(Input.GetButtonUp("Jump")) 
+        if(Input.GetButton("Jump") || Input.GetKey(KeyCode.Space)) apertando = true;
+        if(Input.GetButtonUp("Jump") || Input.GetKeyUp(KeyCode.Space)) 
         {
             if(contadorDePulos == maximoPulos) requisicaoPulo = false;
             apertando= false;
         }
 
-        if(Input.GetButtonDown("Dash")) if(podeDash) StartCoroutine(Dash());
+        if(Input.GetButtonDown("Dash") || Input.GetKeyDown(KeyCode.L)) if(podeDash) StartCoroutine(Dash());
     }
 
     private void FixedUpdate()

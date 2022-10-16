@@ -12,7 +12,7 @@ public class PlayerAtirar : MonoBehaviour
 
     private void Update() {
 
-        if(Input.GetButton("Fire1")) Atirar();
+        if(/*input.GetButton("Fire1") ||*/ Input.GetKey(KeyCode.K))Atirar();
 
         if(contadorEspecial == 100)
         {
