@@ -65,8 +65,8 @@ public class PlayerMovimentacao : MonoBehaviour
         if (atingido) return;
 
         horizontal = Input.GetAxisRaw("Horizontal");
-        if(Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.Space)) 
-        {
+        if(Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.Space)) {
+            AudioManager.instance.PlaySound(PlayerStatus.instance.jumpSound);
             requisicaoPulo = true;
             if(contadorDePulos != maximoPulos) contadorDePulos++;
         }
@@ -83,11 +83,11 @@ public class PlayerMovimentacao : MonoBehaviour
     private void FixedUpdate()
     {
         // não permite virar nem pular nem nada enquanto está no dash
-        if (estaDashando) return;
+        //if (estaDashando) return;
 
         // ================================================================     MOVIMENTAÇÃO        =============================================================================================
-        if (podeMover) rb.velocity = new Vector2(horizontal * velocidade, rb.velocity.y);
-    
+        //if (podeMover) rb.velocity = new Vector2(horizontal * velocidade, rb.velocity.y);
+
         // Flip
         if (!olharDireita && horizontal > 0) Virar();
         else if (olharDireita && horizontal < 0) Virar();
@@ -137,13 +137,18 @@ public class PlayerMovimentacao : MonoBehaviour
         // Aumentando gravidade do pulo
         if (rb.velocity.y < 0) rb.velocity += Vector2.up * Physics2D.gravity.y * 1.5f * Time.deltaTime;
 
+
+        if (estaDashando) return;
+
+        // ================================================================     MOVIMENTAÇÃO        =============================================================================================
+        if (podeMover) rb.velocity = new Vector2(horizontal * velocidade, rb.velocity.y);
+
     }
 
     // ===========================================================================      DASH        =============================================================================================
 
-    private IEnumerator Dash() 
-    {
-        Debug.Log("esta dashando");
+    private IEnumerator Dash() {
+        AudioManager.instance.PlaySound(PlayerStatus.instance.dashSound);
         podeDash = false;
         estaDashando = true;
         rb.gravityScale = 0f;
@@ -179,6 +184,7 @@ public class PlayerMovimentacao : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         if(!podeDash) podeDash = PlayerStatus.instance.DashHabilitado();
         if(maximoPulos == 1) maximoPulos = PlayerStatus.instance.PuloDuploHabilitado();
+        AudioManager.instance.PlaySound(PlayerStatus.instance.atkSound);
     }
  
      // ===========================================================================      KNOCKBACK        =============================================================================================
