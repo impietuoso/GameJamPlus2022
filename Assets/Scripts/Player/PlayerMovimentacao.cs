@@ -8,7 +8,6 @@ public class PlayerMovimentacao : MonoBehaviour
     private Rigidbody2D rb;
     //private Animator anim;
     public GameObject player;
-    
 
     [Header("Movimentação")]
     [SerializeField] private float velocidade = 8f;
@@ -45,7 +44,6 @@ public class PlayerMovimentacao : MonoBehaviour
     public float knockBackY = 10f;
     public float direcaoKnockBack = 0;
     public bool atingido = false;
-
 
     private void Awake()
     {
@@ -132,10 +130,7 @@ public class PlayerMovimentacao : MonoBehaviour
         // Aumentando gravidade do pulo
         if (rb.velocity.y < 0) rb.velocity += Vector2.up * Physics2D.gravity.y * 1.5f * Time.deltaTime;
 
-        
     }
-
-
 
     // ===========================================================================      DASH        =============================================================================================
 
@@ -155,7 +150,6 @@ public class PlayerMovimentacao : MonoBehaviour
         podeDash = true;
 
     }
-
 
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.tag == "Inimigo")
@@ -201,7 +195,6 @@ public class PlayerMovimentacao : MonoBehaviour
 
     // ===========================================================================        ANIMAÇÕES        =====================================================================================
    
-
     private void AnimacaoDash() 
     {
         //anim.Play("Dash");// animação do Dash
