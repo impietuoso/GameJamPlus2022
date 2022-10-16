@@ -89181,7 +89181,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.6005155, y: 1}
+    m_SensorSize: {x: 1.6009175, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -89436,7 +89436,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1214066527}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.9582081, y: -1.0525846, z: -10}
+  m_LocalPosition: {x: -0.95619917, y: -1.0525699, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -90897,6 +90897,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2373065484546983639, guid: 95ce8a4549773f04c81157059c7d9142, type: 3}
+      propertyPath: m_SortingOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2373065484546983639, guid: 95ce8a4549773f04c81157059c7d9142, type: 3}
+      propertyPath: m_Parameters.textureMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2373065484546983639, guid: 95ce8a4549773f04c81157059c7d9142, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 5274024574910097510, guid: 95ce8a4549773f04c81157059c7d9142, type: 3}
       propertyPath: podeDash
       value: 1
@@ -90913,6 +90925,30 @@ PrefabInstance:
       propertyPath: forcaDoPulo
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 6027327213675445600, guid: 95ce8a4549773f04c81157059c7d9142, type: 3}
+      propertyPath: atkSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 8b9caef58fdc11848a342b93f7025aed, type: 3}
+    - target: {fileID: 6027327213675445600, guid: 95ce8a4549773f04c81157059c7d9142, type: 3}
+      propertyPath: runSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 066006f9c7097b84a95f5f2e1ef2b830, type: 3}
+    - target: {fileID: 6027327213675445600, guid: 95ce8a4549773f04c81157059c7d9142, type: 3}
+      propertyPath: dashSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 4db74988a968b3942ae05de7fcf6669e, type: 3}
+    - target: {fileID: 6027327213675445600, guid: 95ce8a4549773f04c81157059c7d9142, type: 3}
+      propertyPath: jumpSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 716463ed91c268140b786337c6509f32, type: 3}
+    - target: {fileID: 6027327213675445600, guid: 95ce8a4549773f04c81157059c7d9142, type: 3}
+      propertyPath: deathSound
+      value: 
+      objectReference: {fileID: 8300000, guid: b2294fb0e703d674aaba9a25d5ff50bc, type: 3}
+    - target: {fileID: 6027327213675445600, guid: 95ce8a4549773f04c81157059c7d9142, type: 3}
+      propertyPath: damageSound
+      value: 
+      objectReference: {fileID: 8300000, guid: e024da2e06207de43bb2454cdd5123b2, type: 3}
     - target: {fileID: 6027327213675445600, guid: 95ce8a4549773f04c81157059c7d9142, type: 3}
       propertyPath: GameOverPanel
       value: 

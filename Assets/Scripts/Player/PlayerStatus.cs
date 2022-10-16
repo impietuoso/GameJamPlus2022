@@ -12,6 +12,12 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField] private float tempoInvuneral = 2f;
     public Animator playerAnim;
     public GameObject GameOverPanel;
+    public AudioClip runSound;
+    public AudioClip jumpSound;
+    public AudioClip atkSound;
+    public AudioClip damageSound;
+    public AudioClip deathSound;
+    public AudioClip dashSound;
 
     private void Awake() {
         if(instance == null) instance = this;
@@ -24,6 +30,9 @@ public class PlayerStatus : MonoBehaviour
         if(other.tag == "Inimigo") TomarDano();
     }
 
+    public void RunSound() {
+        AudioManager.instance.PlaySound(PlayerStatus.instance.runSound);
+    }
 
     private void HabilitarDash()
     {
