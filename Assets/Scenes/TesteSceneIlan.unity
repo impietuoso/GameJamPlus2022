@@ -123,6 +123,16 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &692014009 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2373065484546983638, guid: 95ce8a4549773f04c81157059c7d9142, type: 3}
+  m_PrefabInstance: {fileID: 6193021610377514938}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &808709303 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2373065484433743699, guid: 95ce8a4549773f04c81157059c7d9142, type: 3}
+  m_PrefabInstance: {fileID: 6193021610377514938}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &887050004
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,5 +528,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2428206372274033569, guid: 95ce8a4549773f04c81157059c7d9142, type: 3}
+      propertyPath: coolDown
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2428206372274033569, guid: 95ce8a4549773f04c81157059c7d9142, type: 3}
+      propertyPath: posicaoTiro
+      value: 
+      objectReference: {fileID: 808709303}
+    - target: {fileID: 5274024574910097510, guid: 95ce8a4549773f04c81157059c7d9142, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 692014009}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95ce8a4549773f04c81157059c7d9142, type: 3}

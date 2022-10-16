@@ -6,6 +6,7 @@ TagManager:
   tags:
   - "Ch\xE3o"
   - Inimigo
+  - BalaPlayer
   layers:
   - Default
   - TransparentFX
@@ -16,7 +17,7 @@ TagManager:
   - "Ch\xE3o"
   - Player
   - Inimigo
-  - 
+  - BalaPlayer
   - 
   - 
   - 
