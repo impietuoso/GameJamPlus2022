@@ -22,11 +22,6 @@ public class Bala : MonoBehaviour
         if (rb.velocity.x < 0 && !sr.flipX) sr.flipX = true;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        gameObject.SetActive(false);
-    }
-
     private void OnEnable()
     {
         StartCoroutine(Desabilitar());
@@ -38,4 +33,8 @@ public class Bala : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    private void OnTriggerEnter2D(Collider2D other) {
+        Debug.Log(other.tag);
+        gameObject.SetActive(false);
+    }
 }
