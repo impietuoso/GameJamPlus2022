@@ -8,15 +8,19 @@ public class PlayerAtirar : MonoBehaviour
     [SerializeField] private bool podeAtirar = true;
     [SerializeField] private bool podeEspecial = false;
     public int contadorEspecial = 0;
+    [SerializeField] private float coolDown = 1f;
 
     private void Update() {
+
+        if(Input.GetButton("Fire1")) Atirar();
+
         if(contadorEspecial == 100)
         {
             podeEspecial = true;
         }
     }
 
-    public void Atirar()
+    private void Atirar()
     {
         if(podeAtirar)
         {
@@ -34,7 +38,7 @@ public class PlayerAtirar : MonoBehaviour
 
     }
 
-     public void AtirarEspecial()
+     private void AtirarEspecial()
     {
         if(podeEspecial)
         {
@@ -54,7 +58,7 @@ public class PlayerAtirar : MonoBehaviour
 
     private IEnumerator CoolDown() 
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(coolDown);
         podeAtirar = true;
     }
 }
