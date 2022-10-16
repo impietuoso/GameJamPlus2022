@@ -8,6 +8,7 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField] private byte vida = 1;
     [SerializeField] private bool puloDuploOn = false;
     [SerializeField] private bool dashOn = false;
+    [SerializeField] private bool podeDano = true;
     
     private void Awake() {
         if(instance == null) instance = this;
@@ -34,7 +35,8 @@ public class PlayerStatus : MonoBehaviour
     }
     private void TomarDano()
     {
-        vida--;
+        if(podeDano) vida--;
+        StartCoroutine(Invulnerabilidade());
         if(dashOn && !puloDuploOn) dashOn = false;
         if(!dashOn && puloDuploOn) puloDuploOn = false;
         if(dashOn && puloDuploOn) puloDuploOn = false;
@@ -59,6 +61,13 @@ public class PlayerStatus : MonoBehaviour
     private IEnumerator CoolDown()
     {
         yield return new WaitForSeconds(0.5f);
+    }
+
+    private IEnumerator Invulnerabilidade()
+    {
+        podeDano = false;
+        yield return new WaitForSeconds(1.5f);
+        podeDano = true;
     }
 
     private void Morte()
