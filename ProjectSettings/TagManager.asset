@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - "Ch\xE3o"
+  - Inimigo
+  - BalaPlayer
+  - ArmaduraDash
+  - ArmaduraPuloDuplo
   layers:
   - Default
   - TransparentFX
@@ -11,12 +16,12 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - "Ch\xE3o"
+  - Player
+  - Inimigo
+  - BalaPlayer
+  - ArmaduraDash
+  - ArmaduraPuloDuplo
   - 
   - 
   - 
