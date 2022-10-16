@@ -180,8 +180,6 @@ public class PlayerMovimentacao : MonoBehaviour
 
     private bool EstaNoChao()
     {
-        if (Physics2D.OverlapCircle(checkChao.position, 0.1f, camadaChao)) {
-        } 
         return Physics2D.OverlapCircle(checkChao.position, 0.1f, camadaChao);
     }
 
