@@ -8,4 +8,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+<<<<<<< Updated upstream:GameJamPlus2020/ProjectSettings/EditorBuildSettings.asset
   m_configObjects: {}
+=======
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 52a1b928932322641931164a2bade434, type: 2}
+    com.unity.input.settings: {fileID: 11400000, guid: 64ee39d8855e576458e116118e3620e4, type: 2}
+    com.unity.localization.settings: {fileID: 11400000, guid: 931911da951a6ce4394feaaf773b5939, type: 2}
+>>>>>>> Stashed changes:ProjectSettings/EditorBuildSettings.asset
