@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 4564400745436789572}
   - component: {fileID: 8172449358759547830}
   - component: {fileID: 1337091970725856414}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: BalaInimigo
-  m_TagString: Inimigo
+  m_TagString: BalaInimigo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118,7 +118,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

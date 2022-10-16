@@ -883,11 +883,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2242194232994340915, guid: 34f3dc7fa77f1424c8f86524995d9a41, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 66.92
+      value: 106.84
       objectReference: {fileID: 0}
     - target: {fileID: 2242194232994340915, guid: 34f3dc7fa77f1424c8f86524995d9a41, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.08
+      value: 2.43
       objectReference: {fileID: 0}
     - target: {fileID: 2242194232994340915, guid: 34f3dc7fa77f1424c8f86524995d9a41, type: 3}
       propertyPath: m_LocalPosition.z
@@ -923,7 +923,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2266398770857992308, guid: 34f3dc7fa77f1424c8f86524995d9a41, type: 3}
       propertyPath: m_Name
-      value: InimigoEscudo
+      value: Boss
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34f3dc7fa77f1424c8f86524995d9a41, type: 3}

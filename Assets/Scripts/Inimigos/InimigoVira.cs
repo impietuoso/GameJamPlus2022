@@ -72,4 +72,11 @@ public class InimigoVira : MonoBehaviour
         localScale.x *= -1f;
         transform.localScale = localScale;
     }
+
+    [SerializeField] private int vida = 30;
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.tag == "BalaPlayer") vida--;
+        if(vida < 1) gameObject.SetActive(false);
+    }
 }
