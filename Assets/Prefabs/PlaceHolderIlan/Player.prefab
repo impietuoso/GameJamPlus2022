@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2373065484320014257}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.1, z: 0}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -74,7 +74,6 @@ GameObject:
   - component: {fileID: 2373065484546983627}
   - component: {fileID: 2373065484546983626}
   - component: {fileID: 2373065484546983637}
-  - component: {fileID: 2373065484546983636}
   - component: {fileID: 2373065484546983639}
   - component: {fileID: 2428206372274033569}
   - component: {fileID: 5274024574910097510}
@@ -192,37 +191,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!114 &2373065484546983636
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2373065484546983638}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 3e63472d77697844f8b415b5965a92c0, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
+  m_Constraints: 4
 --- !u!96 &2373065484546983639
 TrailRenderer:
   serializedVersion: 2
@@ -343,6 +312,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ff4dce2d6f5d1b44b253848eec53d60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  posicaoTiro: {fileID: 0}
+  podeAtirar: 1
+  podeEspecial: 0
+  contadorEspecial: 0
 --- !u!114 &5274024574910097510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -355,6 +328,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2332b0062dff4474f85571b67bcd4612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 2373065484433743698}
+  velocidade: 8
+  olharDireita: 1
+  checkChao: {fileID: 2373065484320014262}
+  camadaChao:
+    serializedVersion: 2
+    m_Bits: 64
+  contadorDePulos: 0
+  forcaDoPulo: 5
+  tempoCoyote: 0.2
+  contadortempoCoyote: 0
+  tempoPulo: 0.3
+  contadorTempoPulo: 0
+  apertando: 0
+  requisicaoPulo: 0
+  estaNoAr: 0
+  forcaDash: 24
+  duracaoDash: 0.5
+  esperaDash: 2
+  gravidadeDash: 0
+  podeDash: 1
+  estaDashando: 0
 --- !u!114 &6409195306744737608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -367,6 +362,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 643a0ffedd1861643ac5f4b1626b1240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  balaPrefab: {fileID: 6096987828061305630, guid: 56399f812fa972e428879e6d319759e1, type: 3}
+  EspecialPrefab: {fileID: 2448165103369502227, guid: c4e446fdf2dd5e041b7a41edebe6e724, type: 3}
 --- !u!114 &6027327213675445600
 MonoBehaviour:
   m_ObjectHideFlags: 0
