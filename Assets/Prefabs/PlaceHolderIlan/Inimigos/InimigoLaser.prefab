@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 3774267717160611038}
   - component: {fileID: 7414746019254364183}
   - component: {fileID: 186232302079548954}
+  - component: {fileID: 7388352}
   m_Layer: 0
   m_Name: InimigoLaser
   m_TagString: Untagged
@@ -187,3 +188,27 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.21133338}
   serializedVersion: 2
   m_Radius: 0.5000001
+--- !u!114 &7388352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8086206180630968152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf558c6f1662819479d664fc11ad7acc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  posicaoLaser: {fileID: 2836706764541828218}
+  podeAtirar: 1
+  recarregando: 0
+  duracaoMira: 1
+  duracaoLaser: 4
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  raio: 10
+  olharDireita: 0
+  target: {fileID: 0}
+  distancia: 0

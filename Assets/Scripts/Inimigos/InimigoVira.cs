@@ -24,7 +24,7 @@ public class InimigoVira : MonoBehaviour
             if(distancia < 0 && olharDireita) Virar();
         }
 
-        if(checkPlayer() && !atirando) 
+        if(CheckPlayer() && !atirando) 
         {
             podeAtirar = true;
         }
@@ -32,7 +32,7 @@ public class InimigoVira : MonoBehaviour
         if(podeAtirar) StartCoroutine(Atirar());
     }
 
-    private bool checkPlayer()
+    private bool CheckPlayer()
     {
         Collider2D colisaoAlvo = Physics2D.OverlapCircle(transform.position, raio, playerLayer);
         if(colisaoAlvo != null) target = colisaoAlvo.transform;
