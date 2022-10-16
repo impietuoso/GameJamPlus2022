@@ -20,6 +20,7 @@ public class PlayerMovimentacao : MonoBehaviour
     public Transform checkChao;
     public LayerMask camadaChao;
     [SerializeField] private int contadorDePulos = 0;
+    [SerializeField] private int maximoPulos = 1;
     [SerializeField]  private float forcaDoPulo = 8f;
     [SerializeField] private float tempoCoyote = 0.2f;
     [SerializeField] private float contadortempoCoyote;
@@ -34,7 +35,7 @@ public class PlayerMovimentacao : MonoBehaviour
     [SerializeField] private float duracaoDash = 0.5f;
     [SerializeField] private float esperaDash = 2f;
     [SerializeField] private float gravidadeDash;
-    [SerializeField] private bool podeDash = true;
+    [SerializeField] private bool podeDash = false;
     [SerializeField] private bool estaDashando = false;
     private TrailRenderer tr;
     private float gravidadeNormal;
@@ -59,11 +60,15 @@ public class PlayerMovimentacao : MonoBehaviour
         if(atingido) return;
 
         horizontal = Input.GetAxisRaw("Horizontal");
-        if(Input.GetButtonDown("Jump")) requisicaoPulo = true;
+        if(Input.GetButtonDown("Jump")) 
+        {
+            requisicaoPulo = true;
+            if(contadorDePulos != maximoPulos) contadorDePulos++;
+        }
         if(Input.GetButton("Jump")) apertando = true;
         if(Input.GetButtonUp("Jump")) 
         {
-            if(contadorDePulos >= 2) requisicaoPulo = false;
+            if(contadorDePulos == maximoPulos) requisicaoPulo = false;
             apertando= false;
         }
 
@@ -97,15 +102,19 @@ public class PlayerMovimentacao : MonoBehaviour
             contadorTempoPulo -= Time.deltaTime;
         }
 
-        if(contadorTempoPulo < 0) estaNoAr = false;
-
+        if(contadorTempoPulo < 0)
+        {
+            estaNoAr = false;
+            apertando = false;
+        } 
+        if(contadorDePulos == maximoPulos) requisicaoPulo = false;
         if(contadortempoCoyote > 0 && requisicaoPulo)
         {
             AnimacaoPular();
-            contadorDePulos++;
+            
             rb.velocity = new Vector2(rb.velocity.x, forcaDoPulo);
             estaNoAr = true;
-            if(contadorDePulos >= 2) requisicaoPulo = false;
+            
         }
 
         if(apertando && estaNoAr)
@@ -115,11 +124,10 @@ public class PlayerMovimentacao : MonoBehaviour
 
         if(contadortempoCoyote < 0 && requisicaoPulo)
         {
+            requisicaoPulo = false;
             AnimacaoPular();
-            contadorDePulos++;
             rb.velocity = new Vector2(rb.velocity.x, forcaDoPulo);
             estaNoAr = true;
-            if(contadorDePulos >= 2) requisicaoPulo = false;
         }
         // Aumentando gravidade do pulo
         if (rb.velocity.y < 0) rb.velocity += Vector2.up * Physics2D.gravity.y * 1.5f * Time.deltaTime;
@@ -148,15 +156,17 @@ public class PlayerMovimentacao : MonoBehaviour
 
     }
 
-     // ===========================================================================      KNOCKBACK        =============================================================================================
 
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.tag == "Inimigo")
         {
             StartCoroutine(KnockBack());
         }
+        if(other.tag == "ArmaduraDash") podeDash = PlayerStatus.instance.DashHabilitado();
+        if(other.tag == "ArmaduraPuloDuplo") maximoPulos = PlayerStatus.instance.PuloDuploHabilitado();
     }
  
+     // ===========================================================================      KNOCKBACK        =============================================================================================
     private IEnumerator KnockBack()
     {
         podeMover = false;
