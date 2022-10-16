@@ -73,6 +73,8 @@ public class PlayerStatus : MonoBehaviour
     private void Morte()
     {
         Debug.Log("Morreu");
+        // Desabilitar o player
+        // tela de gameOver com Retry
     }
 
     private void AnimacaoTomarDano()
