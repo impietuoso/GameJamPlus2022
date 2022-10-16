@@ -540,5 +540,17 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 692014009}
+    - target: {fileID: 5274024574910097510, guid: 95ce8a4549773f04c81157059c7d9142, type: 3}
+      propertyPath: knockBackX
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5274024574910097510, guid: 95ce8a4549773f04c81157059c7d9142, type: 3}
+      propertyPath: knockBackY
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6027327213675445600, guid: 95ce8a4549773f04c81157059c7d9142, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95ce8a4549773f04c81157059c7d9142, type: 3}

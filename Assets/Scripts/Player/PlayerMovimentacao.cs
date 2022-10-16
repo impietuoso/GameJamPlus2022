@@ -12,7 +12,7 @@ public class PlayerMovimentacao : MonoBehaviour
 
     [Header("Movimentação")]
     [SerializeField] private float velocidade = 8f;
-    private float horizontal;
+    [SerializeField] private float horizontal;
     private bool podeMover = true;
     [SerializeField] private bool olharDireita = true;
 
@@ -159,13 +159,15 @@ public class PlayerMovimentacao : MonoBehaviour
  
     private IEnumerator KnockBack()
     {
-        rb.velocity = new Vector2(0,0);
+        podeMover = false;
         atingido = true;
-        if(olharDireita) direcaoKnockBack = 1;
-        else direcaoKnockBack = -1;
-        rb.AddForce( new Vector3(knockBackX * direcaoKnockBack, knockBackY, 0), ForceMode2D.Impulse);
+        if(olharDireita) horizontal = -1 ;
+        else horizontal = 1 ;
+        rb.velocity = new Vector2(knockBackX * horizontal, 0 );
+        rb.AddForce( new Vector2(0, knockBackY), ForceMode2D.Impulse);
         yield return new WaitForSeconds(2f);
         atingido = false;
+        podeMover = true;
     }
 
     // ===========================================================================      SUPORTE E VERIFICAÇÕES      ============================================================================
