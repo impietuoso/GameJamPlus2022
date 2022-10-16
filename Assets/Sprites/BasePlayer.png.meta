@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -850,13 +850,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      BasePlayer_RunAttak4: -1720095307
-      BasePlayer_IdleAttak2: 367105934
-      BasePlayer_IdleAttak0: -1367994119
-      BasePlayer_Death1: -323968883
       BasePlayer_JumpAttak2: -499803309
+      BasePlayer_IdleAttak2: 367105934
+      BasePlayer_RunAttak4: -1720095307
+      BasePlayer_Death1: -323968883
       BasePlayer_IdleAttak4: -1952885109
       BasePlayer_JumpAttak0: 635322298
+      BasePlayer_IdleAttak0: -1367994119
       BasePlayer_RunAttak1: -1274813759
       BasePlayer_RunAttak0: -936882080
       BasePlayer_idle1: 742926926

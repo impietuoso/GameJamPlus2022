@@ -29,6 +29,7 @@ public class InimigoVira : MonoBehaviour
             podeAtirar = true;
         }
         else podeAtirar = false;
+
         if(podeAtirar) StartCoroutine(Atirar());
     }
 
@@ -55,7 +56,7 @@ public class InimigoVira : MonoBehaviour
         {
             bala.transform.position = posicaoBala.position;
             bala.SetActive(true);
-            bala.GetComponent<Bala>().direcao = (int)transform.localScale.y * -1;
+            bala.GetComponent<Bala>().direcao = (int)transform.localScale.x * -1;
         }
 
         yield return new WaitForSeconds(coolDownTiro);
@@ -68,7 +69,7 @@ public class InimigoVira : MonoBehaviour
     {
         olharDireita = !olharDireita;
         Vector3 localScale = transform.localScale;
-        localScale.y *= -1f;
+        localScale.x *= -1f;
         transform.localScale = localScale;
     }
 }

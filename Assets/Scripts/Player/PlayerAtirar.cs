@@ -24,6 +24,7 @@ public class PlayerAtirar : MonoBehaviour
     {
         if(podeAtirar)
         {
+            PlayerStatus.instance.playerAnim.SetFloat("Blend", 1f);
             podeAtirar = false;
             GameObject bala = PlayerObjectPooling.instance.PegarBala();
 
@@ -60,5 +61,6 @@ public class PlayerAtirar : MonoBehaviour
     {
         yield return new WaitForSeconds(coolDown);
         podeAtirar = true;
+        PlayerStatus.instance.playerAnim.SetFloat("Blend", 0);
     }
 }

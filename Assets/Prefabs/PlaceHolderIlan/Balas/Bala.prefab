@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4564400745436789572}
   - component: {fileID: 8172449358759547830}
   - component: {fileID: 1337091970725856414}
+  - component: {fileID: 3106117751341816011}
   m_Layer: 9
   m_Name: Bala
   m_TagString: BalaPlayer
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 6096987828061305630}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.1654038, y: 1.1976544, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -75,8 +76,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_SortingOrder: 6
+  m_Sprite: {fileID: 3027764, guid: 41fe6bd20044d2a4caab7ce7c3b2295f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -121,8 +122,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1}
+  m_Offset: {x: 0.41377878, y: -0.03120216}
+  m_Size: {x: 0.5631656, y: 0.37595287}
   m_Direction: 1
 --- !u!114 &1337091970725856414
 MonoBehaviour:
@@ -138,3 +139,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocidade: 20
   direcao: 0
+--- !u!95 &3106117751341816011
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6096987828061305630}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 716b3cd41cc4fc248bade40ae2ffcb8c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

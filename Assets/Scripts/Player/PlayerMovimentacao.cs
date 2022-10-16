@@ -55,7 +55,14 @@ public class PlayerMovimentacao : MonoBehaviour
 
     // =====================================================================     INPUTS        =============================================================================================
     private void Update() {
-        if(atingido) return;
+
+        PlayerStatus.instance.playerAnim.SetBool("IsJumping", !Physics2D.OverlapCircle(checkChao.position, 0.1f, camadaChao));
+        if (Input.GetAxisRaw("Horizontal") != 0)
+            PlayerStatus.instance.playerAnim.SetBool("IsRunning", true);
+        else
+            PlayerStatus.instance.playerAnim.SetBool("IsRunning", false);
+
+        if (atingido) return;
 
         horizontal = Input.GetAxisRaw("Horizontal");
         if(Input.GetButtonDown("Jump")) 
@@ -102,7 +109,7 @@ public class PlayerMovimentacao : MonoBehaviour
 
         if(contadorTempoPulo < 0)
         {
-            estaNoAr = false;
+            //estaNoAr = false;
             apertando = false;
         } 
         if(contadorDePulos == maximoPulos) requisicaoPulo = false;
@@ -207,23 +214,19 @@ public class PlayerMovimentacao : MonoBehaviour
 
     // ===========================================================================        ANIMAÇÕES        =====================================================================================
    
-    private void AnimacaoDash() 
-    {
-        //anim.Play("Dash");// animação do Dash
+    private void AnimacaoDash() {
+        //PlayerStatus.instance.playerAnim.SetTrigger("Dash");
     }
 
-    private void AnimacaoCorrer()
-    {
-        //if (podeMover) anim.Play("Run"); // animação de correr
+    private void AnimacaoCorrer() {
+        //PlayerStatus.instance.playerAnim.SetBool("IsRunning", true);
     }
 
-    private void AnimacaoPular()
-    {
-        //anim.Play("Jump");// animação de pular
+    private void AnimacaoPular() {
+
     }
 
-    private void AnimacaoIdle() 
-    {
-        //anim.Play("Idle");// animação idle
+    private void AnimacaoIdle() {
+        //PlayerStatus.instance.playerAnim.SetBool("IsRunning", false);
     }
 }

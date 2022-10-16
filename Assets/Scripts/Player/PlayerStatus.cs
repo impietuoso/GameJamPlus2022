@@ -10,9 +10,11 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField] private bool dashOn = false;
     [SerializeField] private bool podeDano = true;
     [SerializeField] private float tempoInvuneral = 2f;
-    
+    public Animator playerAnim;
+
     private void Awake() {
         if(instance == null) instance = this;
+        playerAnim = GetComponent<Animator>();
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
@@ -34,9 +36,8 @@ public class PlayerStatus : MonoBehaviour
         vida ++;
         AnimacaoGanharArmadura();
     }
-    private void TomarDano()
-    {
-        if(podeDano) vida--;
+    private void TomarDano() {
+        if (podeDano) vida--;
         StartCoroutine(Invulnerabilidade());
         if(dashOn && !puloDuploOn) dashOn = false;
         if(!dashOn && puloDuploOn) puloDuploOn = false;
@@ -66,14 +67,14 @@ public class PlayerStatus : MonoBehaviour
 
     private void Morte()
     {
+        playerAnim.Play("Death");
         Debug.Log("Morreu");
         // Desabilitar o player
         // tela de gameOver com Retry
     }
 
-    private void AnimacaoTomarDano()
-    {
-        // animacao de tomar dano aqui
+    private void AnimacaoTomarDano() {
+        playerAnim.Play("Damage");
     }
     private void AnimacaoGanharArmadura()
     {
