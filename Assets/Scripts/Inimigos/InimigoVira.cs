@@ -50,6 +50,8 @@ public class InimigoVira : MonoBehaviour
     {
         atirando = true;
         podeAtirar = false;
+
+        yield return new WaitForSeconds(coolDownTiro);
         GameObject bala = ObjectPoolingInimigos.instance.PegarBala();
 
         if (bala != null) 
@@ -59,7 +61,6 @@ public class InimigoVira : MonoBehaviour
             bala.GetComponent<Bala>().direcao = (int)transform.localScale.x * -1;
         }
 
-        yield return new WaitForSeconds(coolDownTiro);
         podeAtirar = true;
         atirando = false;
     }

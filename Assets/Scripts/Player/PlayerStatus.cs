@@ -54,6 +54,7 @@ public class PlayerStatus : MonoBehaviour
     private void TomarDano() {
         if (podeDano) 
         {
+            playerAnim.Play("Damage");
             vida--;
             StartCoroutine(Invulnerabilidade());
             if(dashOn && !puloDuploOn) dashOn = false;
