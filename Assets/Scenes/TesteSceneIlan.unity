@@ -145,6 +145,7 @@ MonoBehaviour:
   recarregando: 0
   duracaoMira: 1
   duracaoLaser: 4
+  vida: 30
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -882,12 +883,20 @@ PrefabInstance:
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2242194232994340915, guid: 34f3dc7fa77f1424c8f86524995d9a41, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2242194232994340915, guid: 34f3dc7fa77f1424c8f86524995d9a41, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2242194232994340915, guid: 34f3dc7fa77f1424c8f86524995d9a41, type: 3}
       propertyPath: m_LocalPosition.x
       value: 106.84
       objectReference: {fileID: 0}
     - target: {fileID: 2242194232994340915, guid: 34f3dc7fa77f1424c8f86524995d9a41, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.43
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 2242194232994340915, guid: 34f3dc7fa77f1424c8f86524995d9a41, type: 3}
       propertyPath: m_LocalPosition.z
@@ -924,6 +933,10 @@ PrefabInstance:
     - target: {fileID: 2266398770857992308, guid: 34f3dc7fa77f1424c8f86524995d9a41, type: 3}
       propertyPath: m_Name
       value: Boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 6648426556712358873, guid: 34f3dc7fa77f1424c8f86524995d9a41, type: 3}
+      propertyPath: podeMetralhar
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34f3dc7fa77f1424c8f86524995d9a41, type: 3}
