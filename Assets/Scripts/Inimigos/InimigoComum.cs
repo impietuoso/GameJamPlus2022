@@ -12,6 +12,7 @@ public class InimigoComum : MonoBehaviour
     [SerializeField] private bool atirando = false;
     [SerializeField] private float coolDownTiro = 1.5f;
     [SerializeField] private int vida = 30;
+    public AudioClip hitSound;
 
 
     private void Update()
@@ -57,7 +58,11 @@ public class InimigoComum : MonoBehaviour
     
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "BalaPlayer") vida--;
+        if (other.tag == "BalaPlayer") {
+            vida--;
+            AudioManager.instance.PlaySound(hitSound);
+        }
+        
         if(vida < 1) gameObject.SetActive(false);
     }
 

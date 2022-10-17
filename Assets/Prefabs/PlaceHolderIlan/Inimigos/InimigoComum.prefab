@@ -145,6 +145,8 @@ MonoBehaviour:
   podeAtirar: 0
   atirando: 0
   coolDownTiro: 1.5
+  vida: 30
+  hitSound: {fileID: 8300000, guid: e024da2e06207de43bb2454cdd5123b2, type: 3}
 --- !u!1 &8176017852658987646
 GameObject:
   m_ObjectHideFlags: 0

@@ -149,6 +149,8 @@ MonoBehaviour:
   olharDireita: 0
   target: {fileID: 0}
   distancia: 0
+  hitSound: {fileID: 8300000, guid: e024da2e06207de43bb2454cdd5123b2, type: 3}
+  vida: 30
 --- !u!95 &1843429537
 Animator:
   serializedVersion: 4

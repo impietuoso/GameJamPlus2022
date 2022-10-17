@@ -15,6 +15,7 @@ public class PlayerStatus : MonoBehaviour
     [Header("Animações")]
     public Animator playerAnim;
     public GameObject GameOverPanel;
+    public GameObject TryAgainPanel;
     public AudioClip runSound;
     public AudioClip jumpSound;
     public AudioClip atkSound;
@@ -32,6 +33,10 @@ public class PlayerStatus : MonoBehaviour
         if(other.tag == "ArmaduraPuloDuplo") if(!puloDuploOn) HabilitarPuloDuplo();
         if(other.tag == "Inimigo" || other.tag == "BalaInimigo") {
             TomarDano();
+        }
+        if(other.tag == "End") {
+            GameManager.instance.ShowCanvasGroup(GameOverPanel.GetComponent<CanvasGroup>());
+            Destroy(this.gameObject, 1f);
         }
     }
 
@@ -55,6 +60,7 @@ public class PlayerStatus : MonoBehaviour
         if (podeDano) 
         {
             playerAnim.Play("Damage");
+            AudioManager.instance.PlaySound(damageSound);
             vida--;
             StartCoroutine(Invulnerabilidade());
             if(dashOn && !puloDuploOn) dashOn = false;
@@ -87,8 +93,8 @@ public class PlayerStatus : MonoBehaviour
     private void Morte()
     {
         playerAnim.Play("Death");
-        Debug.Log("Morreu");
-        GameManager.instance.ShowCanvasGroup(GameOverPanel.GetComponent<CanvasGroup>());
+        AudioManager.instance.PlaySound(deathSound);
+        GameManager.instance.ShowCanvasGroup(TryAgainPanel.GetComponent<CanvasGroup>());
         Destroy(this.gameObject, 1.5f);
         // Desabilitar o player
         // tela de gameOver com Retry
