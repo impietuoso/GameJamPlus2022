@@ -10,6 +10,7 @@ public class InimigoLaser : MonoBehaviour
     [SerializeField] private bool recarregando = false;
     [SerializeField] private float duracaoMira = 1f;
     [SerializeField] private float duracaoLaser = 5f;
+    [SerializeField] private int vida = 30;
 
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private float raio = 5f;
@@ -85,5 +86,11 @@ public class InimigoLaser : MonoBehaviour
         Vector3 localScale = transform.localScale;
         localScale.y *= -1f;
         transform.localScale = localScale;
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.tag == "BalaPlayer") vida--;
+        if(vida < 1) gameObject.SetActive(false);
     }
 }

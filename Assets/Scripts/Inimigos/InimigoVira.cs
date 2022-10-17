@@ -14,6 +14,7 @@ public class InimigoVira : MonoBehaviour
     [SerializeField] private bool olharDireita;
     [SerializeField] private Transform target;
     [SerializeField] private float distancia;
+    [SerializeField] private int vida = 30;
 
     private void Update()
     {
@@ -71,5 +72,12 @@ public class InimigoVira : MonoBehaviour
         Vector3 localScale = transform.localScale;
         localScale.x *= -1f;
         transform.localScale = localScale;
+    }
+
+    
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.tag == "BalaPlayer") vida--;
+        if(vida < 1) gameObject.SetActive(false);
     }
 }

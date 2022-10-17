@@ -143,7 +143,6 @@ public class PlayerMovimentacao : MonoBehaviour
 
     private IEnumerator Dash() 
     {
-        Debug.Log("esta dashando");
         podeDash = false;
         estaDashando = true;
         rb.gravityScale = 0f;
