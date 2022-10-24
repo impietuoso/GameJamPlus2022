@@ -20,6 +20,8 @@ public class PlayerAtirar : MonoBehaviour
         }
     }
 
+    public void setPodeAtirar(bool canFire) => this.podeAtirar = canFire;
+
     private void Atirar()
     {
         if(podeAtirar)
