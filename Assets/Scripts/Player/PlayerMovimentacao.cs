@@ -14,6 +14,7 @@ public class PlayerMovimentacao : MonoBehaviour
     [SerializeField] private float horizontal;
     private bool podeMover = true;
     [SerializeField] private bool olharDireita = true;
+    [SerializeField] private bool canFlip = true;
 
     [Header("Pulo")]
     public Transform checkChao;
@@ -44,6 +45,7 @@ public class PlayerMovimentacao : MonoBehaviour
     public float knockBackY = 10f;
     public float direcaoKnockBack = 0;
     public bool atingido = false;
+    public float timeKnockbacked = 2f;
 
     private void Awake()
     {
@@ -53,7 +55,7 @@ public class PlayerMovimentacao : MonoBehaviour
         gravidadeNormal = rb.gravityScale;
     }
 
-    // =====================================================================     INPUTS        =============================================================================================
+    #region INPUTS
     private void Update() {
 
         PlayerStatus.instance.playerAnim.SetBool("IsJumping", !Physics2D.OverlapCircle(checkChao.position, 0.1f, camadaChao));
@@ -82,20 +84,13 @@ public class PlayerMovimentacao : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // não permite virar nem pular nem nada enquanto está no dash
-        //if (estaDashando) return;
-
-        // ================================================================     MOVIMENTAÇÃO        =============================================================================================
-        //if (podeMover) rb.velocity = new Vector2(horizontal * velocidade, rb.velocity.y);
-
         // Flip
-        if (!olharDireita && horizontal > 0) Virar();
-        else if (olharDireita && horizontal < 0) Virar();
+        PlayerFlip();
 
         // =====================================================================     PULO        =============================================================================================
 
         // Coyote Efect 
-        if(EstaNoChao())
+        if (EstaNoChao())
         {
             estaNoAr = false;
             contadorDePulos = 0;
@@ -109,17 +104,13 @@ public class PlayerMovimentacao : MonoBehaviour
 
         if(contadorTempoPulo < 0)
         {
-            //estaNoAr = false;
             apertando = false;
         } 
         if(contadorDePulos == maximoPulos) requisicaoPulo = false;
         if(contadortempoCoyote > 0 && requisicaoPulo)
-        {
-            AnimacaoPular();
-            
+        {            
             rb.velocity = new Vector2(rb.velocity.x, forcaDoPulo);
             estaNoAr = true;
-            
         }
 
         if(apertando && estaNoAr)
@@ -130,7 +121,6 @@ public class PlayerMovimentacao : MonoBehaviour
         if(contadortempoCoyote < 0 && requisicaoPulo)
         {
             requisicaoPulo = false;
-            AnimacaoPular();
             rb.velocity = new Vector2(rb.velocity.x, forcaDoPulo);
             estaNoAr = true;
         }
@@ -145,7 +135,9 @@ public class PlayerMovimentacao : MonoBehaviour
 
     }
 
-    // ===========================================================================      DASH        =============================================================================================
+    #endregion
+
+    #region DASH
 
     private IEnumerator Dash() {
         AudioManager.instance.PlaySound(PlayerStatus.instance.dashSound);
@@ -154,7 +146,6 @@ public class PlayerMovimentacao : MonoBehaviour
         rb.gravityScale = 0f;
         rb.velocity = new Vector2(  transform.localScale.x * forcaDash, 0f);
         tr.emitting = true;
-        AnimacaoDash();
         yield return new WaitForSeconds(duracaoDash);
         tr.emitting = false;
         rb.gravityScale = gravidadeNormal;
@@ -164,10 +155,15 @@ public class PlayerMovimentacao : MonoBehaviour
 
     }
 
+    #endregion
+
+    #region MECÂNICAS
+
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.tag == "Inimigo")
+        if(other.tag == "Inimigo" || other.tag == "BalaInimigo")
         {
-            StartCoroutine(KnockBack());
+            float enemyX = other.gameObject.transform.position.x;
+            StartCoroutine(KnockBack(enemyX));
         }
         if(other.tag == "ArmaduraDash") 
         {
@@ -186,24 +182,27 @@ public class PlayerMovimentacao : MonoBehaviour
         if(maximoPulos == 1) maximoPulos = PlayerStatus.instance.PuloDuploHabilitado();
         AudioManager.instance.PlaySound(PlayerStatus.instance.atkSound);
     }
- 
-     // ===========================================================================      KNOCKBACK        =============================================================================================
-    private IEnumerator KnockBack()
+
+    #endregion
+
+    #region KNOCKBACK
+    private IEnumerator KnockBack(float enemyX)
     {
-        podeMover = false;
+        MovePlayer(false);
         atingido = true;
-        if(olharDireita) horizontal = -1 ;
-        else horizontal = 1 ;
-        rb.velocity = new Vector2(knockBackX * horizontal, 0 );
-        rb.AddForce( new Vector2(0, knockBackY), ForceMode2D.Impulse);
-        yield return new WaitForSeconds(2f);
+        if ( enemyX-transform.position.x > 0) horizontal = -1;
+        else horizontal = 1;
+        rb.velocity = new Vector2(0, 0);
+        rb.AddForce( new Vector2(knockBackX * horizontal, knockBackY), ForceMode2D.Impulse);
+        yield return new WaitForSeconds(timeKnockbacked);
         atingido = false;
-        podeMover = true;
+        MovePlayer(true);
         podeDash = PlayerStatus.instance.DashHabilitado();
         maximoPulos = PlayerStatus.instance.PuloDuploHabilitado();
     }
+    #endregion
 
-    // ===========================================================================      SUPORTE E VERIFICAÇÕES      ============================================================================
+    #region SUPORTE E VERIFICAÇÕES
 
     private bool EstaNoChao()
     {
@@ -218,21 +217,21 @@ public class PlayerMovimentacao : MonoBehaviour
         transform.localScale = localScale;
     }
 
-    // ===========================================================================        ANIMAÇÕES        =====================================================================================
-   
-    private void AnimacaoDash() {
-        //PlayerStatus.instance.playerAnim.SetTrigger("Dash");
+    private void PlayerFlip()
+    {
+        if (canFlip)
+        {
+            if (!olharDireita && horizontal > 0) Virar();
+            else if (olharDireita && horizontal < 0) Virar();
+        }
     }
 
-    private void AnimacaoCorrer() {
-        //PlayerStatus.instance.playerAnim.SetBool("IsRunning", true);
+    private void MovePlayer(bool canMakeMoviment)
+    {
+        podeMover = canMakeMoviment;
+        GetComponent<PlayerAtirar>().setPodeAtirar(canMakeMoviment);
+        canFlip = canMakeMoviment;
     }
 
-    private void AnimacaoPular() {
-
-    }
-
-    private void AnimacaoIdle() {
-        //PlayerStatus.instance.playerAnim.SetBool("IsRunning", false);
-    }
+    #endregion
 }

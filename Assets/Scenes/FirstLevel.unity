@@ -84680,7 +84680,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 63.15
+  m_fontSize: 53.7
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -90690,7 +90690,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.6, y: 1}
+    m_SensorSize: {x: 2.3871596, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -90891,7 +90891,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 64.35
+  m_fontSize: 40.4
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -91168,7 +91168,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1214066527}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.9607854, y: -1.0526041, z: -10}
+  m_LocalPosition: {x: 2.9749355, y: -1.1117724, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -91526,7 +91526,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 46.6
+  m_fontSize: 40.4
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -93293,12 +93293,20 @@ PrefabInstance:
       value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 5274024574910097510, guid: 95ce8a4549773f04c81157059c7d9142, type: 3}
+      propertyPath: knockBackX
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5274024574910097510, guid: 95ce8a4549773f04c81157059c7d9142, type: 3}
       propertyPath: forcaDoPulo
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5274024574910097510, guid: 95ce8a4549773f04c81157059c7d9142, type: 3}
       propertyPath: maximoPulos
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5274024574910097510, guid: 95ce8a4549773f04c81157059c7d9142, type: 3}
+      propertyPath: timeKnockbacked
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6027327213675445600, guid: 95ce8a4549773f04c81157059c7d9142, type: 3}
       propertyPath: vida
