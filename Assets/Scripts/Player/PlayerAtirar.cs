@@ -26,8 +26,8 @@ public class PlayerAtirar : MonoBehaviour
     {
         if(podeAtirar)
         {
-            PlayerStatus.instance.playerAnim.SetFloat("Blend", 1f);
-            AudioManager.instance.PlaySound(PlayerStatus.instance.atkSound);
+            // PlayerStatus.instance.playerAnim.SetFloat("Blend", 1f);
+            // AudioManager.instance.PlaySound(PlayerStatus.instance.atkSound);
             podeAtirar = false;
             GameObject bala = PlayerObjectPooling.instance.PegarBala();
 
@@ -66,6 +66,6 @@ public class PlayerAtirar : MonoBehaviour
         yield return new WaitForSeconds(coolDown);
         podeAtirar = true;
         yield return new WaitForSeconds(coolDown);
-        PlayerStatus.instance.playerAnim.SetFloat("Blend", 0);
+        // PlayerStatus.instance.playerAnim.SetFloat("Blend", 0);
     }
 }

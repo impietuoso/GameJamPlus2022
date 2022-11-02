@@ -12,20 +12,20 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField] private bool podeDano = true;
     [SerializeField] private float tempoInvuneral = 2f;
 
-    [Header("Animações")]
-    public Animator playerAnim;
-    public GameObject GameOverPanel;
-    public GameObject TryAgainPanel;
-    public AudioClip runSound;
-    public AudioClip jumpSound;
-    public AudioClip atkSound;
-    public AudioClip damageSound;
-    public AudioClip deathSound;
-    public AudioClip dashSound;
+    // [Header("Animações")]
+    // public Animator playerAnim;
+    // public GameObject GameOverPanel;
+    // public GameObject TryAgainPanel;
+    // public AudioClip runSound;
+    // public AudioClip jumpSound;
+    // public AudioClip atkSound;
+    // public AudioClip damageSound;
+    // public AudioClip deathSound;
+    // public AudioClip dashSound;
 
     private void Awake() {
         if(instance == null) instance = this;
-        playerAnim = GetComponent<Animator>();
+        // playerAnim = GetComponent<Animator>();
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
@@ -35,13 +35,13 @@ public class PlayerStatus : MonoBehaviour
             TomarDano();
         }
         if(other.tag == "End") {
-            GameManager.instance.ShowCanvasGroup(GameOverPanel.GetComponent<CanvasGroup>());
+            // GameManager.instance.ShowCanvasGroup(GameOverPanel.GetComponent<CanvasGroup>());
             Destroy(this.gameObject, 1f);
         }
     }
 
     public void RunSound() {
-        AudioManager.instance.PlaySound(PlayerStatus.instance.runSound);
+        // AudioManager.instance.PlaySound(PlayerStatus.instance.runSound);
     }
 
     private void HabilitarDash()
@@ -59,8 +59,8 @@ public class PlayerStatus : MonoBehaviour
     private void TomarDano() {
         if (podeDano) 
         {
-            playerAnim.Play("Damage");
-            AudioManager.instance.PlaySound(damageSound);
+            // playerAnim.Play("Damage");
+            // AudioManager.instance.PlaySound(damageSound);
             vida--;
             StartCoroutine(Invulnerabilidade());
             if(dashOn && !puloDuploOn) dashOn = false;
@@ -92,16 +92,16 @@ public class PlayerStatus : MonoBehaviour
 
     private void Morte()
     {
-        playerAnim.Play("Death");
-        AudioManager.instance.PlaySound(deathSound);
-        GameManager.instance.ShowCanvasGroup(TryAgainPanel.GetComponent<CanvasGroup>());
+        // playerAnim.Play("Death");
+        // AudioManager.instance.PlaySound(deathSound);
+        // GameManager.instance.ShowCanvasGroup(TryAgainPanel.GetComponent<CanvasGroup>());
         Destroy(this.gameObject, 1.5f);
         // Desabilitar o player
         // tela de gameOver com Retry
     }
 
     private void AnimacaoTomarDano() {
-        playerAnim.Play("Damage");
+        // playerAnim.Play("Damage");
     }
     private void AnimacaoGanharArmadura()
     {
