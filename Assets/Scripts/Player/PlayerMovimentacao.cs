@@ -59,17 +59,15 @@ public class PlayerMovimentacao : MonoBehaviour
     #region INPUTS
     private void Update() {
 
-        // PlayerStatus.instance.playerAnim.SetBool("IsJumping", !Physics2D.OverlapCircle(checkChao.position, 0.1f, camadaChao));
-        // if (Input.GetAxisRaw("Horizontal") != 0)
-            // PlayerStatus.instance.playerAnim.SetBool("IsRunning", true);
-        // else
-            // PlayerStatus.instance.playerAnim.SetBool("IsRunning", false);
+        PlayerStatus.instance.playerAnim.SetBool("IsJumping", !Physics2D.OverlapCircle(checkChao.position, 0.1f, camadaChao));
+        if (Input.GetAxisRaw("Horizontal") != 0) PlayerStatus.instance.playerAnim.SetBool("IsRunning", true);
+        else PlayerStatus.instance.playerAnim.SetBool("IsRunning", false);
 
         if (atingido) return;
 
         horizontal = Input.GetAxisRaw("Horizontal");
         if(Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.Space)) {
-            // AudioManager.instance.PlaySound(PlayerStatus.instance.jumpSound);
+            AudioManager.instance.PlaySound(PlayerStatus.instance.jumpSound);
             if(contadorDePulos != maximoPulos) {
                 contadorDePulos++;
                 requisicaoPulo = true;
@@ -137,7 +135,7 @@ public class PlayerMovimentacao : MonoBehaviour
     #region DASH
 
     private IEnumerator Dash() {
-        // AudioManager.instance.PlaySound(PlayerStatus.instance.dashSound);
+        AudioManager.instance.PlaySound(PlayerStatus.instance.dashSound);
         podeDash = false;
         estaDashando = true;
         rb.gravityScale = 0f;
@@ -177,7 +175,7 @@ public class PlayerMovimentacao : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         if(!podeDash) podeDash = PlayerStatus.instance.DashHabilitado();
         if(maximoPulos == 1) maximoPulos = PlayerStatus.instance.PuloDuploHabilitado();
-        // AudioManager.instance.PlaySound(PlayerStatus.instance.atkSound);
+        AudioManager.instance.PlaySound(PlayerStatus.instance.atkSound);
     }
 
     #endregion
