@@ -66,6 +66,6 @@ public class PlayerAtirar : MonoBehaviour
         yield return new WaitForSeconds(coolDown);
         podeAtirar = true;
         yield return new WaitForSeconds(coolDown);
-        PlayerStatus.instance.playerAnim.SetFloat("Blend", 0);
+         PlayerStatus.instance.playerAnim.SetFloat("Blend", 0);
     }
 }

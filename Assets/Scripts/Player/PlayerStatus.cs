@@ -35,7 +35,7 @@ public class PlayerStatus : MonoBehaviour
             TomarDano();
         }
         if(other.tag == "End") {
-            GameManager.instance.ShowCanvasGroup(GameOverPanel.GetComponent<CanvasGroup>());
+             GameManager.instance.ShowCanvasGroup(GameOverPanel.GetComponent<CanvasGroup>());
             Destroy(this.gameObject, 1f);
         }
     }
@@ -96,8 +96,8 @@ public class PlayerStatus : MonoBehaviour
         AudioManager.instance.PlaySound(deathSound);
         GameManager.instance.ShowCanvasGroup(TryAgainPanel.GetComponent<CanvasGroup>());
         Destroy(this.gameObject, 1.5f);
-        // Desabilitar o player
-        // tela de gameOver com Retry
+        //Desabilitar o player
+        //tela de gameOver com Retry
     }
 
     private void AnimacaoTomarDano() {

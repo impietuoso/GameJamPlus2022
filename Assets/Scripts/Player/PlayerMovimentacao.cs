@@ -29,6 +29,7 @@ public class PlayerMovimentacao : MonoBehaviour
     [SerializeField] private bool apertando = false;
     [SerializeField] private bool requisicaoPulo = false;
     [SerializeField] private bool estaNoAr = false;
+    private bool soltou = false;
 
     [Header("Dash")]
     [SerializeField] private float forcaDash = 24f;
@@ -59,29 +60,28 @@ public class PlayerMovimentacao : MonoBehaviour
     private void Update() {
 
         PlayerStatus.instance.playerAnim.SetBool("IsJumping", !Physics2D.OverlapCircle(checkChao.position, 0.1f, camadaChao));
-        if (Input.GetAxisRaw("Horizontal") != 0)
-            PlayerStatus.instance.playerAnim.SetBool("IsRunning", true);
-        else
-            PlayerStatus.instance.playerAnim.SetBool("IsRunning", false);
+        if (Input.GetAxisRaw("Horizontal") != 0) PlayerStatus.instance.playerAnim.SetBool("IsRunning", true);
+        else PlayerStatus.instance.playerAnim.SetBool("IsRunning", false);
 
         if (atingido) return;
 
         horizontal = Input.GetAxisRaw("Horizontal");
         if(Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.Space)) {
             AudioManager.instance.PlaySound(PlayerStatus.instance.jumpSound);
-            requisicaoPulo = true;
-            if(contadorDePulos != maximoPulos) contadorDePulos++;
+            if(contadorDePulos != maximoPulos) {
+                contadorDePulos++;
+                requisicaoPulo = true;
+            }
         }
-        if(Input.GetButton("Jump") || Input.GetKey(KeyCode.Space)) apertando = true;
         if(Input.GetButtonUp("Jump") || Input.GetKeyUp(KeyCode.Space)) 
         {
+            if(estaNoAr) soltou = true;
             if(contadorDePulos == maximoPulos) requisicaoPulo = false;
-            apertando= false;
         }
 
         if(Input.GetButtonDown("Dash") || Input.GetKeyDown(KeyCode.L)) if(podeDash) StartCoroutine(Dash());
     }
-
+    
     private void FixedUpdate()
     {
         // Flip
@@ -102,31 +102,25 @@ public class PlayerMovimentacao : MonoBehaviour
             contadorTempoPulo -= Time.deltaTime;
         }
 
-        if(contadorTempoPulo < 0)
-        {
-            apertando = false;
-        } 
+        if(contadorTempoPulo < 0) soltou = false;
         if(contadorDePulos == maximoPulos) requisicaoPulo = false;
         if(contadortempoCoyote > 0 && requisicaoPulo)
-        {            
+        {   
             rb.velocity = new Vector2(rb.velocity.x, forcaDoPulo);
             estaNoAr = true;
         }
 
-        if(apertando && estaNoAr)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, forcaDoPulo);
-        }
+        if(soltou && estaNoAr) rb.velocity += Vector2.up * Physics2D.gravity.y * 3f * Time.deltaTime;;
 
         if(contadortempoCoyote < 0 && requisicaoPulo)
         {
             requisicaoPulo = false;
-            rb.velocity = new Vector2(rb.velocity.x, forcaDoPulo);
+            
+            rb.velocity = new Vector2(rb.velocity.x, forcaDoPulo); // double jump
             estaNoAr = true;
         }
         // Aumentando gravidade do pulo
         if (rb.velocity.y < 0) rb.velocity += Vector2.up * Physics2D.gravity.y * 1.5f * Time.deltaTime;
-
 
         if (estaDashando) return;
 
@@ -134,6 +128,7 @@ public class PlayerMovimentacao : MonoBehaviour
         if (podeMover) rb.velocity = new Vector2(horizontal * velocidade, rb.velocity.y);
 
     }
+
 
     #endregion
 
